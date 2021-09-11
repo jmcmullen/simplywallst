@@ -1,0 +1,47 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+datasource db {
+  provider = "sqlite"
+  url      = "file:./sws.db"
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model swsCompany {
+  id   String @id @default(uuid())
+  name String
+  ticker_symbol String
+  exchange_symbol String
+  date_generated String
+  security_name String
+  exchange_country_iso String
+  listing_currency_iso String
+  canonical_url String
+  unique_symbol_slug String
+  score_id Int
+}
+
+model swsCompanyPriceClose {
+  company_id String @id
+  date String
+  price Decimal
+  date_created String
+}
+
+model swsCompanyScore {
+  id Int @unique
+  company_id String
+  date_generated String
+  dividend Int
+  future Int
+  health Int
+  Management Int
+  past Int
+  value Int
+  misc Int
+  total Int
+  sentence String
+}
